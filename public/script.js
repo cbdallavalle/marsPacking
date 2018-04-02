@@ -7,6 +7,12 @@ $('form').submit((event) => {
   addItem();
 })
 
+$('article').on('click', 'button', function(event) {
+  const idToDelete = $(this).parent().attr('id');
+  deleteItem(idToDelete);
+  $(`#${idToDelete}`).remove();
+})
+
 const displayAllItems = async () => {
   const items = await getItems();
   const itemsHTML = getItemHTML(items).join('');
@@ -19,7 +25,6 @@ const getItems = async () => {
 }
 
 const getItemHTML = (items) => {
-  console.log(items)
   return items.map( item => {
     const packed = item.packed === true ? 'packed' : 'not-packed';
     return (
@@ -70,4 +75,8 @@ const appendNewItem = (item, itemId) => {
   $('section').last().append(itemHTML);
 }
 
-
+const deleteItem = async (id) => {
+  await fetch(`/api/v1/mars_items/${id}`, {
+    method: 'DELETE'
+  }); 
+}
