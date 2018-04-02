@@ -6,7 +6,8 @@ exports.up = function(knex, Promise) {
       table.boolean('packed');
 
       table.timestamps(true, true)
-    }])
+    })
+  ])
 }
 
 exports.down = function(knex, Promise) {
