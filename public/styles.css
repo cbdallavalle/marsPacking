@@ -1,23 +1,121 @@
-.packed-cont {
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+header {
   display: flex;
-}
-
-.checkbox {
-  width: 30px;
-  height: 30px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 170px;
+  margin-bottom: 50px; 
+  background-color: #12252F;
+  background-image: url('./assets/spaceCat1.gif');
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-position: right;
+  color: white;
 }
 
-.checkbox:hover {
+header button {
+  padding: 6px 9px;
+  background-color: #F1B140;
+  border: none;
+  color: white;    
+  font-size: 17px;
+}
+
+header button:hover {
+  background-color: #467d48;
   cursor: pointer;
 }
 
-#packed {
+header h1 {
+  font-family: 'Baloo', cursive;
+}
+
+header form {
+  display: flex;
+}
+
+header input {
+  padding-left: 10px;
+  border: none;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section {
+  position: relative;
+  padding: 10px 30px;
+  margin-bottom: 15px;
+  min-width: 310px;
+  width: 80%;
+  max-width: 500px;
+  background-color: #11262f0f;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px #a1a1a1;
+}
+
+section button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  height: 25px;
+  width: 25px;
+  background-image: url('./assets/delete.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  border-radius: 100px;
+}
+
+section button:hover {
+  background-image: url('./assets/delete-hover.svg');
+  cursor: pointer;
+}
+
+section .packed-cont {
+  display: flex;
+  align-items: center;
+}
+
+section .packed-cont p {
+  padding-left: 15px;
+  font-weight: bold;
+  color: #1772a0;
+}
+
+section .packed-cont .checkbox {
+  height: 30px;
+  width: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+section .packed-cont .checkbox:hover {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+}
+
+section .packed-cont #packed {
   background-image: url('./assets/check-box.svg');
 }
 
-#not-packed {
+section .packed-cont #not-packed {
   background-image: url('./assets/square.svg');
+}
+
+@media screen and (max-width: 500px) {
+  header {
+    background-image: none;
+  }
 }

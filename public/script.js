@@ -41,7 +41,7 @@ const getItemHTML = (items) => {
            <div class="checkbox" id="${ packed }"></div>
            <p>Packed</p>
          </div>
-         <button type="button">Delete</button>
+         <button type="button"></button>
        </section>`
     )
   })
@@ -79,11 +79,9 @@ const postItem = async (item) => {
 
 const appendNewItem = (item, itemId) => {
   const itemHTML = getItemHTML([item]).join();
-  console.log($('section').last());
   if ($('section').last().attr('id')) {
     $('section').last().after(itemHTML);
   } else {
-    console.log('article hit')
     $('article').append(itemHTML);
   }
   $('section').last().prop('id', itemId)
