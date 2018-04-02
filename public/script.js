@@ -80,6 +80,7 @@ const postItem = async (item) => {
 const appendNewItem = (item, itemId) => {
   const itemHTML = getItemHTML([item]).join();
   $('section').last().append(itemHTML);
+  $('section').last().prop('id', itemId)
 }
 
 const deleteItem = async (id) => {
