@@ -79,7 +79,13 @@ const postItem = async (item) => {
 
 const appendNewItem = (item, itemId) => {
   const itemHTML = getItemHTML([item]).join();
-  $('section').last().append(itemHTML);
+  console.log($('section').last());
+  if ($('section').last().attr('id')) {
+    $('section').last().after(itemHTML);
+  } else {
+    console.log('article hit')
+    $('article').append(itemHTML);
+  }
   $('section').last().prop('id', itemId)
 }
 
