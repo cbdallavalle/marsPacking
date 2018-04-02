@@ -34,7 +34,7 @@ app.post('/api/v1/mars_items', (request, response) => {
     if (!itemToAdd[requiredParams]) {
       return response
         .status(422)
-        .send({ error: `You are missing a ${requiredParams}`})
+        .send({ error: `You are missing a ${ requiredParams }`})
     }
   }
 
@@ -55,12 +55,17 @@ app.put('/api/v1/mars_items/:id', (request, response) => {
     if (!itemToUpdate[requiredParam]) {
       return response
         .status(422)
-        .send({ error: `You are missing a ${requiredParam}`})
+        .send({ error: `You are missing a ${ requiredParam }`})
     }
   }
 
-  // database('items').where('id', id).update({...itemToUpdate})
-  //   .then()
+  database('items').where('id', id).update({ ...itemToUpdate })
+    .then( item => {
+      response.status(201).json({ ...itemToUpdate })
+    })
+    .catch( error => {
+      response.status(500).json({ error: 'Can only accept an update to whether the item is packed or not' })
+    })
 })
 
 app.delete('/api/v1/mars_items/:id', async (request, response) => {
