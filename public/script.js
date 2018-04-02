@@ -14,10 +14,10 @@ $('article').on('click', 'button', function() {
 })
 
 $('article').on('click', '.checkbox', function() {
-  const packed = $(this).attr('id') === 'packed' ? "not-packed" : "packed";
-  $(this).prop('id', packed)
+  const updatedPackedId = $(this).attr('id') === 'packed' ? "not-packed" : "packed";
+  $(this).prop('id', updatedPackedId)
   const idToUpdate = $(this).closest('section').attr('id');
-  updateItem(idToUpdate, packed);
+  updateItem(idToUpdate, updatedPackedId);
 })
 
 const displayAllItems = async () => {
@@ -88,8 +88,8 @@ const deleteItem = async (id) => {
   }); 
 }
 
-const updateItem = async (id, packedUpdated) => {
-  const packed = packedUpdated === "packed" ? "true" : "false";
+const updateItem = async (id, updatedPackedId) => {
+  const packed = updatedPackedId === "packed" ? "true" : "false";
   const itemToUpdate = { packed };
 
   try {
