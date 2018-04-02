@@ -2,6 +2,11 @@ $(this).ready(() => {
   displayAllItems();
 })
 
+$('form').submit((event) => {
+  event.preventDefault();
+  addItem();
+})
+
 const displayAllItems = async () => {
   const items = await getItems();
   const itemsHTML = getItemHTML(items).join('');
@@ -14,10 +19,11 @@ const getItems = async () => {
 }
 
 const getItemHTML = (items) => {
+  console.log(items)
   return items.map( item => {
-    const packed = item.packed ? 'checked' : 'not-checked';
+    const packed = item.packed === true ? 'packed' : 'not-packed';
     return (
-      `<section>
+      `<section id=${item.id}>
          <h2>${ item.name }</h2>
          <div class="packed-cont">
            <div class="checkbox" id="${ packed }"></div>
@@ -28,3 +34,40 @@ const getItemHTML = (items) => {
     )
   })
 }
+
+const addItem = async () => {
+  const item = {
+    name: $('input').val(),
+    packed: "false"
+  }
+
+  try {
+    const itemId = await postItem(item);
+    $('input').val('');
+    appendNewItem(item, itemId.id);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const postItem = async (item) => {
+  try {
+    const response = await fetch('/api/v1/mars_items', {
+      method: 'POST',
+      body: JSON.stringify(item), 
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    return await response.json();
+  } catch (error) {
+    throw new Error({ error: error.message })
+  }
+}
+
+const appendNewItem = (item, itemId) => {
+  const itemHTML = getItemHTML([item]).join();
+  $('section').last().append(itemHTML);
+}
+
+
