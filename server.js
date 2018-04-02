@@ -11,7 +11,6 @@ app.locals.title = 'Mars Packing List'
 app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 app.enable('trust proxy');
 
@@ -22,7 +21,9 @@ app.use(function (req, res, next) {
     res.redirect('https://' + req.headers.host + req.url);
   }
 });
+
 app.use(express.static('public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 app.get('/', (request, response) => {
 
