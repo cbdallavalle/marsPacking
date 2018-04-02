@@ -7,10 +7,17 @@ $('form').submit((event) => {
   addItem();
 })
 
-$('article').on('click', 'button', function(event) {
+$('article').on('click', 'button', function() {
   const idToDelete = $(this).parent().attr('id');
   deleteItem(idToDelete);
   $(`#${idToDelete}`).remove();
+})
+
+$('article').on('click', '.checkbox', function() {
+  const packed = $(this).attr('id') === 'packed' ? "not-packed" : "packed";
+  $(this).prop('id', packed)
+  const idToUpdate = $(this).closest('section').attr('id');
+  updateItem(idToUpdate, packed);
 })
 
 const displayAllItems = async () => {
@@ -79,4 +86,21 @@ const deleteItem = async (id) => {
   await fetch(`/api/v1/mars_items/${id}`, {
     method: 'DELETE'
   }); 
+}
+
+const updateItem = async (id, packedUpdated) => {
+  const packed = packedUpdated === "packed" ? "true" : "false";
+  const itemToUpdate = { packed };
+
+  try {
+    const response = await fetch(`/api/v1/mars_items/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(itemToUpdate), 
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+  } catch (error) {
+    throw new Error({ error: error.message })
+  }
 }

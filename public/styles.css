@@ -1,0 +1,23 @@
+.packed-cont {
+  display: flex;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+#packed {
+  background-image: url('./assets/check-box.svg');
+}
+
+#not-packed {
+  background-image: url('./assets/square.svg');
+}
